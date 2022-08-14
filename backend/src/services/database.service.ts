@@ -20,6 +20,7 @@ export class DatabaseService implements OnApplicationBootstrap {
   ) {}
 
   async getPlayer(identifier: string): Promise<PlayerEntity|undefined> {
+    if (!identifier) return undefined;
     const result = await this.playerRepo.findOne({
       where: { identifier },
       relations: { score: true, guesses: true },
@@ -29,6 +30,7 @@ export class DatabaseService implements OnApplicationBootstrap {
   }
 
   async addPlayer(identifier: string): Promise<PlayerEntity|undefined> {
+    if (!identifier) return undefined;
     const exists = await this.getPlayer(identifier);
     if (exists) return exists;
 
@@ -41,6 +43,7 @@ export class DatabaseService implements OnApplicationBootstrap {
   }
 
   async addGuess(playerId: number, guess: number): Promise<GuessEntity|undefined> {
+    if (!playerId || !guess) return undefined;
     return await this.guessRepo.save({
       playerId,
       guess,
@@ -48,8 +51,9 @@ export class DatabaseService implements OnApplicationBootstrap {
   }
 
   async hasCurrentGuess(playerId: number): Promise<boolean> {
+    if (!playerId) return false;
+    
     const time = new Date();
-
     const result = await this.guessRepo
       .createQueryBuilder("items")
       .where(
@@ -67,6 +71,8 @@ export class DatabaseService implements OnApplicationBootstrap {
     finalPrice: number,
     winner: boolean | false
   ): Promise<void|undefined> {
+    if (!playerId || !guessId || !initialPrice || !finalPrice) return undefined;
+
     const guess = await this.guessRepo.findOne({
       where: { playerId, id: guessId },
     });
@@ -85,6 +91,8 @@ export class DatabaseService implements OnApplicationBootstrap {
   }
 
   async updateScore(playerId: number, value: number): Promise<void|undefined> {
+    if (!playerId || !value) return undefined;
+
     const player = await this.playerRepo.findOne({
       where: { id: playerId },
       relations: { score: true },
