@@ -40,11 +40,11 @@ function GuessContainer() {
   const [currentPrice, setPrice] = useState(0);
   const [cookies, setCookie] = useCookies(['user']);
   const [active, setActiveTimer] = useState(false);
-  
+
   const fetchTokenData = useApiCall("/", "GET");
   //const fetchLeaderboard = useApiCall("/leaderboard", "GET");
   const fetchUser = useApiCall("/player", "POST", { identifier: cookies.user });
-  const requestBet = useApiCall("/guess", "POST", { playerId: state.player?.id || 1, guess: state.bet || 1, initialPrice: currentPrice });
+  const requestBet = useApiCall("/guess", "POST", { playerId: state.player?.id || undefined, guess: state.bet || undefined, initialPrice: currentPrice });
 
   useEffect(
     function() {
@@ -62,7 +62,7 @@ function GuessContainer() {
       } 
       queryData();
     },
-    [state.refresh]
+    [state.refresh, cookies.user]
   );
 
   useEffect(

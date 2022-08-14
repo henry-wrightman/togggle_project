@@ -52,12 +52,13 @@ Please provide the project in a public git repository. -->
 - Ease of global localization/translations
 
 ### sass ###
-- Simplifies styling, and personally is my favorite for styling readibility in-line
+- Simplifies styling, and personally is my favorite for styling readibility inline with React
 
 ### yarn ###
 - Faster then npm & has `yarn workspaces`
 
 ## Additional Thoughts/Todos ##
 - consider sockets as they would likely improve any latency issues / the real-time experience for users (require paid APIs)
+- - realtime price updates while the wager is active, especially for longer bets (e.g hourly)
 - improve UI test coverage (with invocations)
 
