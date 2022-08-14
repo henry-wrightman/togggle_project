@@ -1,5 +1,5 @@
 import { createConnection, getConnection, getConnectionManager, Connection, getConnectionOptions } from 'typeorm';
-import { GuessEntity, PlayerEntity, ScoreEntity } from '../../entities';
+import { GuessEntity, PlayerEntity, ScoreEntity } from '../../src/entities';
 import { DbConnectionOptions } from "./dbTesting.module";
 
 export const initTestDataset = async () => {

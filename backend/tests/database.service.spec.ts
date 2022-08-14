@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DatabaseService } from '../services/database.service';
+import { DatabaseService } from '../src/services/database.service';
 import { DbTestingModule } from './helpers/dbTesting.module';
 import { initTestDataset } from './helpers/dbTestDataset';
-import { PlayerEntity, GuessEntity, ScoreEntity } from "../entities";
+import { PlayerEntity, GuessEntity, ScoreEntity } from "../src/entities";
 
 describe('ApiService', () => {  
   let db: DatabaseService;

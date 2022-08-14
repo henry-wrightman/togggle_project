@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from '../app.controller';
-import { AppService } from '../app.service';
-import { TokenService } from '../services/token.service';
+import { AppController } from '../src/app.controller';
+import { AppService } from '../src/app.service';
+import { TokenService } from '../src/services/token.service';
 import { APP_GUARD } from '@nestjs/core';
-import { GuessGuard } from '../guards/GuessGuard';
-import { DatabaseService } from '../services/database.service';
+import { GuessGuard } from '../src/guards/GuessGuard';
+import { DatabaseService } from '../src/services/database.service';
 import { DbTestingModule } from './helpers/dbTesting.module';
 import { INestApplication } from '@nestjs/common';
-import { PlayerEntity, GuessEntity, ScoreEntity } from "../entities";
+import { PlayerEntity, GuessEntity, ScoreEntity } from "../src/entities";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 describe('AppController', () => {

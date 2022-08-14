@@ -1,8 +1,8 @@
 import { ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { GuessGuard } from '../guards/GuessGuard';
-import { DatabaseService } from '../services/database.service';
+import { GuessGuard } from '../src/guards/GuessGuard';
+import { DatabaseService } from '../src/services/database.service';
 import { createMock } from '@golevelup/nestjs-testing';
 
 describe('Guards', () => {

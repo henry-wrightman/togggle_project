@@ -1,5 +1,5 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GuessEntity, PlayerEntity, ScoreEntity } from '../../entities';
+import { GuessEntity, PlayerEntity, ScoreEntity } from '../../src/entities';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import "dotenv/config";
 import { ConnectionOptions, DataSource } from 'typeorm';
