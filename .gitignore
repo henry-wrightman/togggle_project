@@ -1,0 +1,11 @@
+
+**.DS_Store**
+**.env**
+**/node_modules
+**__snapshots__**
+**/coverage**
+
+**/dist**
+
+**yarn.lock**
+**package-lock.json**

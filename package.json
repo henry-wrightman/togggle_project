@@ -1,0 +1,15 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "private": "true",
+  "workspaces": ["MinuteBets", "backend"],
+  "scripts": {
+    "start": "yarn && yarn concurrently \"cd backend && yarn && nest build && nest start\" \"cd MinuteBets && yarn && yarn start\"",
+    "backend": "cd backend && yarn start",
+    "frontends": "cd MinuteBets && yarn start",
+    "test": "yarn && yarn concurrently \"cd backend && yarn && yarn test\" \"cd MinuteBets && yarn && yarn test\""
+  },
+  "devDependencies": {
+    "concurrently": "latest"
+  }
+}
