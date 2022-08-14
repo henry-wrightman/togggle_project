@@ -24,7 +24,7 @@ Please provide the project in a public git repository. -->
 
 ## Run Everything ##
 1. via `/backend`, run `docker-compose up` to get postgres up & running through docker
-2. configure `backend/.env` (or if using docker, `cp .env.example .env` to create a local env file.)
+2. create a `backend/.env` and `MinuteBets/.env`. see `.env.example` for reference, or `cp .env.example .env` to create a local env file for both. If running postgres via Docker and the default ports, both should be accurate for local testing!
 3. configure db migrations by navigating to `/backend` and running `yarn` followed by`yarn typeorm`.
 4. from root dir: `yarn start` to run both applications! 
 *note:* you may need to refresh the web-page once Nest is fully deployed, could take ~10 seconds
