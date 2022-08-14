@@ -19,6 +19,9 @@ it('initial empty GuessContent state', async () => {
   await waitFor(() => expect(screen.findByText(/Past Guesses/)).rejects,
     { timeout: 3000 });
 
+  await waitFor(() => expect(screen.findByText(/auto-refresh/)).rejects,
+    { timeout: 3000 });
+
   await waitFor(() => expect(screen.findByText(/error/)).rejects,
     { timeout: 3000 });
 });
@@ -66,6 +69,9 @@ it('populated GuessContent state', async () => {
   await waitFor(() => expect(screen.findByText(/Past Guesses/)).resolves.not.toBeNull(),
     { timeout: 3000 });
 
+  await waitFor(() => expect(screen.findByText(/auto-refresh/)).resolves.not.toBeNull(),
+    { timeout: 3000 });
+
   await waitFor(() => expect(screen.findByText(/error/)).rejects, // not found
     { timeout: 3000 });
 });
@@ -76,6 +82,9 @@ it('error populated GuessContent state', async () => {
   render(<GuessContent data={data} />);
 
   await waitFor(() => expect(screen.findByText(/some error/)).resolves.not.toBeNull(),
+    { timeout: 3000 });
+
+  await waitFor(() => expect(screen.findByText(/auto-refresh/)).rejects,
     { timeout: 3000 });
 
   await waitFor(() => expect(screen.findByText(/Current BTC Price/)).rejects, // not found

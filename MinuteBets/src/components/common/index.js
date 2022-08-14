@@ -1,3 +1,3 @@
 export { HeavyText, LightText, NormalText } from "./Text";
-export { Button } from "./Button";
+export { Button, Checkbox } from "./Button";
 export { SelectDropdown } from "./SelectDropdown";

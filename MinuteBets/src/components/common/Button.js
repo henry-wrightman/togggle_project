@@ -4,4 +4,13 @@ const Button = ({ className, onClick, text }) => {
   return <button className={className} onClick={onClick}>{text}</button>;
 };
 
-export { Button };
+const Checkbox = ({ className, label, value, onChange }) => {
+  return (
+    <label>
+      <input className={className} type="checkbox" checked={value} onChange={onChange} />
+      {label}
+    </label>
+  );
+};
+
+export { Button, Checkbox };

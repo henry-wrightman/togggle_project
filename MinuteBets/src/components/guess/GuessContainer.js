@@ -19,7 +19,9 @@ function reducer(state, action) {
     case 'refresh':
       return { ...state, bet: null, error: null, refresh: !state.refresh }
     case 'timerActive':
-      return { ...state, timerActive: !state.timerActive, refresh: !state.refresh };    
+      return { ...state, timerActive: !state.timerActive, refresh: !state.refresh };
+    case 'realtime':
+      return { ...state, realtime: !state.realtime, refresh: !state.refresh }; 
     default:
       throw new Error();
   }
@@ -32,7 +34,8 @@ const INITIAL_STATE = {
   tokenData: null,
   player: null,
   refresh: false,
-  timerActive: false
+  timerActive: false,
+  realtime: false // allow for more "real-time" price updates; every 15 seconds
 };
 
 function GuessContainer() {
@@ -45,6 +48,22 @@ function GuessContainer() {
   //const fetchLeaderboard = useApiCall("/leaderboard", "GET");
   const fetchUser = useApiCall("/player", "POST", { identifier: cookies.user });
   const requestBet = useApiCall("/guess", "POST", { playerId: state.player?.id || 1, guess: state.bet || 1, initialPrice: currentPrice });
+
+  // auto-refresh (checkbox is true); disabled due to rate-limiting risks
+  useEffect(
+    function() {
+      async function realtime() {
+        if (state.realtime) {
+          console.log("realtime");
+          setTimeout(() => {
+            dispatch({ type: 'refresh'});
+          }, 15000);     
+        }     
+      } 
+      realtime();
+    },
+    [state.refresh]
+  );
 
   useEffect(
     function() {
@@ -99,6 +118,10 @@ function GuessContainer() {
     dispatch({ type: 'refresh' });
   }
 
+  const onRealtime = (value) => {
+    dispatch({ type: 'realtime' });
+  }
+
   const canDisplayContent = !state.loading;
   const latestGuess = state.player && state.player.guesses ? state.player.guesses[state.player.guesses.length-1] : undefined;
   const currentGuessETA = latestGuess ? new Date(latestGuess.expiresAt) : undefined;
@@ -118,7 +141,7 @@ function GuessContainer() {
       {canDisplayContent && (
         <div className='contentContainer borderLightRounded'>
           <GuessForm onCallback={onFormSubmission} active={currentGuessETA > Date.now()}/>
-          <GuessContent data={state} />
+          <GuessContent data={state} checkboxOnTrigger={onRealtime} />
         </div>
       )}
     </div>
