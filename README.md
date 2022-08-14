@@ -57,6 +57,7 @@ Please provide the project in a public git repository. -->
 ### yarn ###
 - Faster then npm & has `yarn workspaces`
 
-## Additional Thoughts ##
-- socket's would likely improve any latency issues / the real-time experience for users (require paid APIs)
+## Additional Thoughts/Todos ##
+- consider sockets as they would likely improve any latency issues / the real-time experience for users (require paid APIs)
+- improve UI test coverage (with invocations)
 

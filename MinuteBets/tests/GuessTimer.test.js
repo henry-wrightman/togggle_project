@@ -27,3 +27,15 @@ it('active GuessTimer state', async () => {
     { timeout: 3000 });
 
 });
+
+it('active GuessTimer state callback successful once completed', async () => {
+  const onCallback = jest.fn();
+  
+  render(<GuessTimer onCompletion={onCallback} target={Date.now()+2000} />);
+
+  await waitFor(() => expect(screen.findByText(/until guess resolves/)).resolves.not.toBeNull(),
+    { timeout: 3000 });
+
+  await waitFor(() => expect(onCallback).toHaveBeenCalled(), { timeout: 5000 });
+
+});
