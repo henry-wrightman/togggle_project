@@ -56,7 +56,7 @@ it('populated GuessContent state', async () => {
     },
     "refresh": true,
     "timerActive": true
-};
+  };
   
   render(<GuessContent data={data} />);
 
