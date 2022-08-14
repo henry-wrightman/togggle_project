@@ -57,3 +57,6 @@ Please provide the project in a public git repository. -->
 ### yarn ###
 - Faster then npm & has `yarn workspaces`
 
+## Additional Thoughts ##
+- socket's would likely improve any latency issues / the real-time experience for users (require paid APIs)
+
