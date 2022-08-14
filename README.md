@@ -35,9 +35,9 @@ Please provide the project in a public git repository. -->
 
 # MinuteBets #
 - Through the web-app, one is able to select a desired "bet" for BTC's future price, judging from it's current price on whether or not it will be higher/lower in the next minute. 
-- To select a bet, use the Select Dropdown. (UP: bettign the price will be higher; DOWN, the price being lower) 
-- Then click "Place" to submit the bet.
-- One is able to see their current score, number of past guesses, BTC's current price, and time until their current guess expires. When the guess does expire, the final results will be shown.
+- To select a bet, use the Select Dropdown. (UP: betting the price will be higher; DOWN: price being lower) 
+- Then click "Place" to submit the bet
+- One is able to see their current score, number of past guesses, BTC's current price, and time until their current guess expires. When the guess does expire, the final results will be shown
 - User authentication/sessions are managed with basic uuids stored via cookies. Some of the technologies leveraged for the entire stack are listed below:
 
 <img width="490" alt="image" src="https://user-images.githubusercontent.com/89276242/184519357-58d94be8-22bc-4969-88f5-3caeb49ad5a8.png">
