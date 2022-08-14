@@ -25,15 +25,23 @@ function GuessTimer({ onCompletion, target }) {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    if (target && timerComponents.length === 0) {
-      setTimeLeft(undefined);
-      onCompletion();
-    }
-    
     setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
   });
+
+  useEffect(
+    function () {
+      async function checkForCompletion() {
+        if (timeLeft && target && timerComponents.length === 0) {
+          setTimeLeft(undefined);
+          onCompletion();
+        }
+      }
+      checkForCompletion();
+    },
+    [timeLeft]
+  );
 
   const timerComponents = [];
 
