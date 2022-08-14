@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development --hot",
     "build": "webpack --mode production",
+    "format": "npx prettier --write .",
     "lint": "lint-staged",
     "test": "jest --coverage --updateSnapshot"
   },

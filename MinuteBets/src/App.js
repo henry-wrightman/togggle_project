@@ -17,8 +17,8 @@ const App = () => {
   i18n.translations = translations;
 
   return (
-    <div className='centerAlignAndJust column'>
-       <HeavyText otherClasses='marginSides embolden'>{i18n.t('minuteBets')}</HeavyText>
+    <div className="centerAlignAndJust column">
+      <HeavyText otherClasses="marginSides embolden">{i18n.t('minuteBets')}</HeavyText>
       <GuessContainer />
     </div>
   );
