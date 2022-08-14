@@ -24,7 +24,7 @@ Please provide the project in a public git repository. -->
 
 ## Run Everything ##
 1. via `/backend`, run `docker-compose up` to get postgres up & running through docker
-2. configure `backend/.env` with Postgres DB details (may not be necessary if using docker. the default should suffice!)
+2. configure `backend/.env` (or if using docker, `cp .env.example .env` to create a local env file.)
 3. configure db migrations by navigating to `/backend` and running `yarn` followed by`yarn typeorm`.
 4. from root dir: `yarn start` to run both applications! 
 *note:* you may need to refresh the web-page once Nest is fully deployed, could take ~10 seconds
@@ -37,7 +37,7 @@ Please provide the project in a public git repository. -->
 - Through the web-app, one is able to select a desired "bet" for BTC's future price, judging from it's current price on whether or not it will be higher/lower in the next minute. 
 - To select a bet, use the Select Dropdown. (UP: bettign the price will be higher; DOWN, the price being lower) 
 - Then click "Place" to submit the bet.
-- At the top, one is able to see their current score, number of past guesses, BTC's current price, and time until their current guess expires. When the guess does expire, the final results will be shown. 
+- One is able to see their current score, number of past guesses, BTC's current price, and time until their current guess expires. When the guess does expire, the final results will be shown.
 - User authentication/sessions are managed with basic uuids stored via cookies. Some of the technologies leveraged for the entire stack are listed below:
 
 <img width="490" alt="image" src="https://user-images.githubusercontent.com/89276242/184519357-58d94be8-22bc-4969-88f5-3caeb49ad5a8.png">

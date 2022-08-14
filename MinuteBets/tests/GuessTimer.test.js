@@ -15,7 +15,6 @@ it('initial GuessTimer state', async () => {
 
   await waitFor(() => expect(screen.findByText(/until guess resolves/)).rejects, // not found
     { timeout: 3000 });
-
 });
 
 it('active GuessTimer state', async () => {
@@ -25,7 +24,6 @@ it('active GuessTimer state', async () => {
 
   await waitFor(() => expect(screen.findByText(/until guess resolves/)).resolves.not.toBeNull(),
     { timeout: 3000 });
-
 });
 
 it('active GuessTimer state callback successful once completed', async () => {
@@ -37,5 +35,4 @@ it('active GuessTimer state callback successful once completed', async () => {
     { timeout: 3000 });
 
   await waitFor(() => expect(onCallback).toHaveBeenCalled(), { timeout: 5000 });
-
 });

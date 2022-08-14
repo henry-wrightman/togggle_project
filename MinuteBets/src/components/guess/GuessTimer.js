@@ -25,6 +25,11 @@ function GuessTimer({ onCompletion, target }) {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
+    if (target && timerComponents.length === 0) {
+      setTimeLeft(undefined);
+      onCompletion();
+    }
+    
     setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
@@ -40,16 +45,13 @@ function GuessTimer({ onCompletion, target }) {
 
     timerComponents.push(
       <>
-        <span id='countown'>
+        <span>
           {timeLeft[interval]} {interval}{i18n.t('guessResolvesSuffix')}
         </span>
       </>
     );
   });
-  if (target && timerComponents.length === 0) {
-    setTimeLeft(undefined);
-    onCompletion();
-  }
+
   return (
     <>
       <div className='centerAlignAndJust column container'>
