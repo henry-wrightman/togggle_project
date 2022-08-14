@@ -16,7 +16,7 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"src/**/*.{js,js,ts}\" --fix && tsc --noEmit",
     "typeorm": "typeorm-ts-node-esm schema:sync -d src/scripts/orm-config.ts && typeorm-ts-node-esm migration:run -d src/scripts/orm-config.ts",
-    "typeorm:test": "typeorm-ts-node-esm schema:sync -d src/tests/helpers/dbTesting.module.ts && typeorm-ts-node-esm migration:run -d src/tests/helpers/dbTesting.module.ts"
+    "typeorm:test": "typeorm-ts-node-esm schema:sync -d tests/helpers/dbTesting.module.ts && typeorm-ts-node-esm migration:run -d tests/helpers/dbTesting.module.ts"
   },
   "dependencies": {
     "@nestjs/common": "^8.2.6",
