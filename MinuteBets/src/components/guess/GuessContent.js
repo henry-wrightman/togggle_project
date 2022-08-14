@@ -4,6 +4,7 @@ import { HeavyText, NormalText } from '../common';
 
 function GuessContent({ data }) {
   const hasData = data && data.tokenData && data.player;
+  const guessCount = data.player && data.player.guesses ? data.player.guesses.length : 0;
   return (
       <div className='centerAlignAndJust contentContainer'>
         {hasData && !data.error ? (
@@ -18,7 +19,7 @@ function GuessContent({ data }) {
           </div>
           <div className='menuTotal row'>      
             <NormalText>{i18n.t('pastGuesses')}:</NormalText>
-            <HeavyText otherClasses='marginSides'>{data.player.guesses.length}</HeavyText>
+            <HeavyText otherClasses='marginSides'>{guessCount}</HeavyText>
           </div>
         </div>
       ) : (
