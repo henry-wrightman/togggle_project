@@ -3,17 +3,19 @@ import { GuessForm } from '../src/components/guess';
 import React from 'react';
 import translations from '../src/translations';
 import i18n from 'i18n-js';
+import { render, screen, waitFor } from "@testing-library/react";
 
 i18n.defaultLocale = 'en';
 i18n.translations = translations;
 
-it('initial GuessForm state', () => {
+it('initial GuessForm components', async () => {
   const onCallback = () => {};
   
-  const component = renderer.create(
-    <GuessForm onCallback={onCallback} />
-  );
+  render(<GuessForm onCallback={onCallback} />);
 
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  const dropDown = await screen.findByText(/Select Bet../);
+  expect(dropDown).not.toBeNull();
+
+  expect(screen.getByRole("button", { name: /place/i })).not.toBeNull();
+  expect(screen.getByRole("button", { name: /refresh/i })).not.toBeNull();
 });

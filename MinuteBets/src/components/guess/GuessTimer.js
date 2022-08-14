@@ -39,9 +39,11 @@ function GuessTimer({ onCompletion, target }) {
     }
 
     timerComponents.push(
-      <span>
-        {timeLeft[interval]} {interval}{i18n.t('guessResolvesSuffix')}
-      </span>
+      <>
+        <span id='countown'>
+          {timeLeft[interval]} {interval}{i18n.t('guessResolvesSuffix')}
+        </span>
+      </>
     );
   });
   if (target && timerComponents.length === 0) {
@@ -49,9 +51,11 @@ function GuessTimer({ onCompletion, target }) {
     onCompletion();
   }
   return (
-    <div className='centerAlignAndJust column container'>
-      {timerComponents.length ? timerComponents : <span></span>}
-    </div>
+    <>
+      <div className='centerAlignAndJust column container'>
+        {timerComponents.length ? timerComponents : <span></span>}
+      </div>
+    </>
   );
 }
 

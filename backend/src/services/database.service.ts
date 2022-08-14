@@ -53,7 +53,7 @@ export class DatabaseService implements OnApplicationBootstrap {
     const result = await this.guessRepo
       .createQueryBuilder("items")
       .where(
-        "items.playerId = :playerId and items.expiresAt >= :time and items.createdAt <= :time",
+        "items.playerId = :playerId and items.expiresAt > :time and items.createdAt <= :time",
         { playerId, time }
       )
       .getMany();
