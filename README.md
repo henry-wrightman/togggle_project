@@ -61,4 +61,4 @@ Please provide the project in a public git repository. -->
 - consider sockets as they would likely improve any latency issues / the real-time experience for users (require paid APIs)
 - - realtime price updates while the wager is active, especially for longer bets (e.g hourly)
 - improve UI test coverage (with invocations)
-
+- convert frontend to TS
