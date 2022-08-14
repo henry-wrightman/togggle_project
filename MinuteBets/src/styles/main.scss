@@ -65,7 +65,10 @@ $font-name: 'Nunito';
   margin: 5px;
 }
 
-.borderLightRounded { border: 1px solid $background-color; border-radius: 5px; }
+.borderLightRounded {
+  border: 1px solid $background-color;
+  border-radius: 5px;
+}
 
 .contentContainer {
   padding: 5px;

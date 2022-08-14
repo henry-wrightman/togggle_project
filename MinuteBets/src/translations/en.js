@@ -23,7 +23,7 @@ const en = {
   initialPrice: 'Initial Price',
   finalPrice: 'Final Price',
   pastGuesses: 'Past Guesses',
-  currentScore: 'Current Score'
+  currentScore: 'Current Score',
 };
 
 export default en;

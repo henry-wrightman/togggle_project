@@ -6,32 +6,32 @@ function GuessContent({ data }) {
   const hasData = data && data.tokenData && data.player;
   const guessCount = data.player && data.player.guesses ? data.player.guesses.length : 0;
   return (
-      <div className='centerAlignAndJust contentContainer'>
-        {hasData && !data.error ? (
+    <div className="centerAlignAndJust contentContainer">
+      {hasData && !data.error ? (
         <div>
-          <div className='menuTotal row'>      
+          <div className="menuTotal row">
             <NormalText>{i18n.t('currentPrice')}:</NormalText>
-            <HeavyText otherClasses='marginSides'>${data.tokenData.bitcoin.usd.toLocaleString(undefined, { maximumFractionDigits: 2 })}</HeavyText>
+            <HeavyText otherClasses="marginSides">
+              ${data.tokenData.bitcoin.usd.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+            </HeavyText>
           </div>
-          <div className='menuTotal row'>      
+          <div className="menuTotal row">
             <NormalText>{i18n.t('currentScore')}:</NormalText>
-            <HeavyText otherClasses='marginSides'>{data.player.score.value}</HeavyText>
+            <HeavyText otherClasses="marginSides">{data.player.score.value}</HeavyText>
           </div>
-          <div className='menuTotal row'>      
+          <div className="menuTotal row">
             <NormalText>{i18n.t('pastGuesses')}:</NormalText>
-            <HeavyText otherClasses='marginSides'>{guessCount}</HeavyText>
+            <HeavyText otherClasses="marginSides">{guessCount}</HeavyText>
           </div>
         </div>
-      ) : (
-        (data && data.error ? (
-          <div className='menuTotal row'>      
-            <NormalText>{i18n.t('error')}:</NormalText>
-            <HeavyText otherClasses='marginSides'>{data.error}</HeavyText>
-          </div>
-        ) : (null))
-      )}
+      ) : data && data.error ? (
+        <div className="menuTotal row">
+          <NormalText>{i18n.t('error')}:</NormalText>
+          <HeavyText otherClasses="marginSides">{data.error}</HeavyText>
+        </div>
+      ) : null}
     </div>
   );
-};
+}
 
 export { GuessContent };

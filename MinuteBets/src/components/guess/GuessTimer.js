@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import i18n from 'i18n-js';
 
 function GuessTimer({ onCompletion, target }) {
   if (!target) return;
 
   const calculateTimeLeft = () => {
-    const difference = + target - +new Date();
+    const difference = +target - +new Date();
     if (difference <= 0) return;
-       
+
     let timeLeft = {};
 
     if (difference > 0) {
@@ -54,7 +54,8 @@ function GuessTimer({ onCompletion, target }) {
     timerComponents.push(
       <>
         <span>
-          {timeLeft[interval]} {interval}{i18n.t('guessResolvesSuffix')}
+          {timeLeft[interval]} {interval}
+          {i18n.t('guessResolvesSuffix')}
         </span>
       </>
     );
@@ -62,7 +63,7 @@ function GuessTimer({ onCompletion, target }) {
 
   return (
     <>
-      <div className='centerAlignAndJust column container'>
+      <div className="centerAlignAndJust column container">
         {timerComponents.length ? timerComponents : <span></span>}
       </div>
     </>

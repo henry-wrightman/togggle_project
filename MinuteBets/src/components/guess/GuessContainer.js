@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useReducer } from 'react';
-import { LatestGuess, GuessContent, GuessForm, GuessTimer} from './';
+import { LatestGuess, GuessContent, GuessForm, GuessTimer } from './';
 import i18n from 'i18n-js';
 import useApiCall from '../../hooks/useApiCall';
 import { useCookies } from 'react-cookie';
@@ -17,9 +17,9 @@ function reducer(state, action) {
     case 'error':
       return { ...state, error: action.error, bet: null };
     case 'refresh':
-      return { ...state, bet: null, error: null, refresh: !state.refresh }
+      return { ...state, bet: null, error: null, refresh: !state.refresh };
     case 'timerActive':
-      return { ...state, timerActive: !state.timerActive, refresh: !state.refresh };    
+      return { ...state, timerActive: !state.timerActive, refresh: !state.refresh };
     default:
       throw new Error();
   }
@@ -32,7 +32,7 @@ const INITIAL_STATE = {
   tokenData: null,
   player: null,
   refresh: false,
-  timerActive: false
+  timerActive: false,
 };
 
 function GuessContainer() {
@@ -41,25 +41,29 @@ function GuessContainer() {
   const [cookies, setCookie] = useCookies(['user']);
   const [active, setActiveTimer] = useState(false);
 
-  const fetchTokenData = useApiCall("/", "GET");
+  const fetchTokenData = useApiCall('/', 'GET');
   //const fetchLeaderboard = useApiCall("/leaderboard", "GET");
-  const fetchUser = useApiCall("/player", "POST", { identifier: cookies.user });
-  const requestBet = useApiCall("/guess", "POST", { playerId: state.player?.id || undefined, guess: state.bet || undefined, initialPrice: currentPrice });
+  const fetchUser = useApiCall('/player', 'POST', { identifier: cookies.user });
+  const requestBet = useApiCall('/guess', 'POST', {
+    playerId: state.player?.id || undefined,
+    guess: state.bet || undefined,
+    initialPrice: currentPrice,
+  });
 
   useEffect(
-    function() {
+    function () {
       async function queryData() {
         handleCookiedUser();
 
         const tokenData = await fetchTokenData();
         const user = await fetchUser();
         if (tokenData.data.error || user.data.error) {
-          dispatch({ type: 'error', error: (tokenData.data.error || user.data.error)});
+          dispatch({ type: 'error', error: tokenData.data.error || user.data.error });
         } else {
           setPrice(tokenData.data.bitcoin.usd);
-          dispatch({ type: 'data', tokenData: tokenData.data, player: user.data }); 
-        }       
-      } 
+          dispatch({ type: 'data', tokenData: tokenData.data, player: user.data });
+        }
+      }
       queryData();
     },
     [state.refresh, cookies.user]
@@ -75,55 +79,55 @@ function GuessContainer() {
           } else {
             dispatch({ type: 'timerActive' });
           }
-        } 
+        }
       }
       attemptedRequest();
     },
     [state.bet]
   );
 
-  const onFormSubmission = useCallback(
-    function (data) {
-      if (data.error) dispatch({ type: 'error', error: data.error });
-      else if (data.refresh) dispatch({ type: 'refresh' });
-      else dispatch({ type: 'bet', bet: data.bet });
-    }
-  );
+  const onFormSubmission = useCallback(function (data) {
+    if (data.error) dispatch({ type: 'error', error: data.error });
+    else if (data.refresh) dispatch({ type: 'refresh' });
+    else dispatch({ type: 'bet', bet: data.bet });
+  });
 
   const handleCookiedUser = () => {
     const exists = cookies.user;
     return exists ? cookies.user : setCookie('user', uuidv4());
-  }
+  };
 
   const timerCompleted = () => {
     dispatch({ type: 'refresh' });
-  }
+  };
 
   const canDisplayContent = !state.loading;
-  const latestGuess = state.player && state.player.guesses ? state.player.guesses[state.player.guesses.length-1] : undefined;
+  const latestGuess =
+    state.player && state.player.guesses ? state.player.guesses[state.player.guesses.length - 1] : undefined;
   const currentGuessETA = latestGuess ? new Date(latestGuess.expiresAt) : undefined;
-  const displayCurrentGuess = latestGuess && currentGuessETA && (new Date(currentGuessETA.getTime() + LATEST_GUESS_DISPLAY_OFFSET) > Date.now());
+  const displayCurrentGuess =
+    latestGuess && currentGuessETA && new Date(currentGuessETA.getTime() + LATEST_GUESS_DISPLAY_OFFSET) > Date.now();
   return (
     <>
-    <div className='centerAlignAndJust column container'>
-    { displayCurrentGuess && (
-      <div className='contentContainer borderLightRounded'>
-        <LatestGuess data={latestGuess} />
-        <GuessTimer onCompletion={timerCompleted} target={new Date(currentGuessETA.getTime() + TIMER_BUFFER)} />      
+      <div className="centerAlignAndJust column container">
+        {displayCurrentGuess && (
+          <div className="contentContainer borderLightRounded">
+            <LatestGuess data={latestGuess} />
+            <GuessTimer onCompletion={timerCompleted} target={new Date(currentGuessETA.getTime() + TIMER_BUFFER)} />
+          </div>
+        )}
       </div>
-    )}
-    </div>
-    <div className='centerAlignAndJust column container'>
-      {state.loading && i18n.t('loading')}
-      {canDisplayContent && (
-        <div className='contentContainer borderLightRounded'>
-          <GuessForm onCallback={onFormSubmission} active={currentGuessETA > Date.now()}/>
-          <GuessContent data={state} />
-        </div>
-      )}
-    </div>
+      <div className="centerAlignAndJust column container">
+        {state.loading && i18n.t('loading')}
+        {canDisplayContent && (
+          <div className="contentContainer borderLightRounded">
+            <GuessForm onCallback={onFormSubmission} active={currentGuessETA > Date.now()} />
+            <GuessContent data={state} />
+          </div>
+        )}
+      </div>
     </>
   );
-};
+}
 
 export { GuessContainer };
