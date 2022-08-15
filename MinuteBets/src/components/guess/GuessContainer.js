@@ -37,17 +37,14 @@ const INITIAL_STATE = {
 
 function GuessContainer() {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const [currentPrice, setPrice] = useState(0);
   const [cookies, setCookie] = useCookies(['user']);
-  const [active, setActiveTimer] = useState(false);
-
   const fetchTokenData = useApiCall('/', 'GET');
   //const fetchLeaderboard = useApiCall("/leaderboard", "GET");
   const fetchUser = useApiCall('/player', 'POST', { identifier: cookies.user });
   const requestBet = useApiCall('/guess', 'POST', {
     playerId: state.player?.id || undefined,
     guess: state.bet || undefined,
-    initialPrice: currentPrice,
+    initialPrice: state.tokenData?.bitcoin.usd || undefined,
   });
 
   useEffect(
@@ -60,7 +57,6 @@ function GuessContainer() {
         if (tokenData.data.error || user.data.error) {
           dispatch({ type: 'error', error: tokenData.data.error || user.data.error });
         } else {
-          setPrice(tokenData.data.bitcoin.usd);
           dispatch({ type: 'data', tokenData: tokenData.data, player: user.data });
         }
       }
