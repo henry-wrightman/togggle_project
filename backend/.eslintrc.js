@@ -13,7 +13,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint", "prettier", "unused-imports"],
   rules: {
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-empty-interface": "off",
@@ -23,5 +23,16 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
   },
 };

@@ -14,7 +14,7 @@
     "start:dev": "nodemon --config nodemon.json",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"src/**/*.{js,js,ts}\" --fix && tsc --noEmit",
+    "lint": "eslint \"src/**/*.{js,js,ts}\"",
     "typeorm": "typeorm-ts-node-esm schema:sync -d src/scripts/orm-config.ts && typeorm-ts-node-esm migration:run -d src/scripts/orm-config.ts",
     "typeorm:test": "typeorm-ts-node-esm schema:sync -d tests/helpers/dbTesting.module.ts && typeorm-ts-node-esm migration:run -d tests/helpers/dbTesting.module.ts"
   },
@@ -27,6 +27,7 @@
     "cache-manager": "^3.4.4",
     "cache-manager-ioredis": "^2.1.0",
     "dotenv": "^16.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "helmet": "^5.0.2",
     "pg": "^8.7.3",
     "pg-connection-string": "^2.5.0",

@@ -3,8 +3,6 @@ import {
   CreateDateColumn,
   Entity,
   OneToOne,
-  Index,
-  JoinColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { PlayerEntity } from "./";
