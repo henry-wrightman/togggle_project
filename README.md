@@ -62,3 +62,4 @@ Please provide the project in a public git repository. -->
 - - realtime price updates while the wager is active, especially for longer bets (e.g hourly)
 - improve UI test coverage (with invocations)
 - convert frontend to TS
+- consolidate backend entities/services into their own personal modules (vs. single, shared "database.service"). probably better for maintainability & decoupling
