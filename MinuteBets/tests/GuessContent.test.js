@@ -1,4 +1,3 @@
-import renderer from 'react-test-renderer';
 import { GuessContent } from '../src/components/guess';
 import React from 'react';
 import translations from '../src/translations';

@@ -1,9 +1,8 @@
-import renderer from 'react-test-renderer';
 import { GuessForm } from '../src/components/guess';
 import React from 'react';
 import translations from '../src/translations';
 import i18n from 'i18n-js';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 i18n.defaultLocale = 'en';
 i18n.translations = translations;

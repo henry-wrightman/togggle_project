@@ -6,10 +6,16 @@
   "scripts": {
     "start": "yarn && yarn concurrently \"cd backend && yarn && nest build && nest start\" \"cd MinuteBets && yarn && yarn start\"",
     "backend": "cd backend && yarn start",
-    "frontends": "cd MinuteBets && yarn start",
+    "frontend": "cd MinuteBets && yarn start",
+    "lint": "eslint \"**/*.{js,js,ts}\"",
     "test": "yarn && yarn concurrently \"cd backend && yarn && yarn test\" \"cd MinuteBets && yarn && yarn test\""
   },
   "devDependencies": {
-    "concurrently": "latest"
+    "concurrently": "latest",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^4.0.0"
   }
 }
