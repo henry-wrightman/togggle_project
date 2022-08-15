@@ -1,11 +1,11 @@
-import { ExecutionContext } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { Test, TestingModule } from '@nestjs/testing';
-import { GuessGuard } from '../src/guards/GuessGuard';
-import { DatabaseService } from '../src/services/database.service';
-import { createMock } from '@golevelup/nestjs-testing';
+import { ExecutionContext } from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
+import { Test, TestingModule } from "@nestjs/testing";
+import { GuessGuard } from "../src/guards/GuessGuard";
+import { DatabaseService } from "../src/services/database.service";
+import { createMock } from "@golevelup/nestjs-testing";
 
-describe('Guards', () => {
+describe("Guards", () => {
   let guard: GuessGuard;
   let reflector: Reflector;
 
@@ -25,8 +25,8 @@ describe('Guards', () => {
           useValue: {
             hasCurrentGuess: (playerId: number) => {
               const ids = {
-                '1': true,
-                '2': false,
+                "1": true,
+                "2": false,
               };
               return ids[playerId];
             },
@@ -39,7 +39,7 @@ describe('Guards', () => {
     reflector = module.get<Reflector>(Reflector);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(guard).toBeDefined();
   });
 
@@ -49,13 +49,15 @@ describe('Guards', () => {
       body: {
         playerId: 1,
         guess: 1,
-        initialPrice: 25000
+        initialPrice: 25000,
       },
-      path: '/guess',
-      method: 'POST'
+      path: "/guess",
+      method: "POST",
     });
 
-    await expect(guard.canActivate(mockContext)).rejects.toThrowError('GUESS_IN_PROGRESS');
+    await expect(guard.canActivate(mockContext)).rejects.toThrowError(
+      "GUESS_IN_PROGRESS"
+    );
   });
 
   it(`should throw  for playerId null`, async () => {
@@ -64,13 +66,15 @@ describe('Guards', () => {
       body: {
         playerId: null,
         guess: 1,
-        initialPrice: 25000
+        initialPrice: 25000,
       },
-      path: '/guess',
-      method: 'POST'
+      path: "/guess",
+      method: "POST",
     });
 
-    await expect(guard.canActivate(mockContext)).rejects.toThrowError('GUESS_REQUIRES_PLAYER_ID');
+    await expect(guard.canActivate(mockContext)).rejects.toThrowError(
+      "GUESS_REQUIRES_PLAYER_ID"
+    );
   });
 
   it(`should throw GUESS_IN_PROGRESS for invalid guess`, async () => {
@@ -79,13 +83,15 @@ describe('Guards', () => {
       body: {
         playerId: 1,
         guess: null,
-        initialPrice: 25000
+        initialPrice: 25000,
       },
-      path: '/guess',
-      method: 'POST'
+      path: "/guess",
+      method: "POST",
     });
 
-    await expect(guard.canActivate(mockContext)).rejects.toThrowError('GUESS_INVALID');
+    await expect(guard.canActivate(mockContext)).rejects.toThrowError(
+      "GUESS_INVALID"
+    );
   });
 
   it(`should throw GUESS_IN_PROGRESS for invalid initialPrice`, async () => {
@@ -94,13 +100,15 @@ describe('Guards', () => {
       body: {
         initialPrice: 0,
         playerId: 1,
-        guess: 1
+        guess: 1,
       },
-      path: '/guess',
-      method: 'POST'
+      path: "/guess",
+      method: "POST",
     });
 
-    await expect(guard.canActivate(mockContext)).rejects.toThrowError('GUESS_INVALID_INITIAL_PRICE');
+    await expect(guard.canActivate(mockContext)).rejects.toThrowError(
+      "GUESS_INVALID_INITIAL_PRICE"
+    );
   });
 
   it(`should return true (ok) for playerId 2`, async () => {
@@ -109,10 +117,10 @@ describe('Guards', () => {
       body: {
         playerId: 2,
         guess: 1,
-        initialPrice: 25000
+        initialPrice: 25000,
       },
-      path: '/guess',
-      method: 'POST'
+      path: "/guess",
+      method: "POST",
     });
 
     const result = await guard.canActivate(mockContext);

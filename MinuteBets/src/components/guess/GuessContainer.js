@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer } from 'react';
 import { LatestGuess, GuessContent, GuessForm, GuessTimer } from './';
 import i18n from 'i18n-js';
 import useApiCall from '../../hooks/useApiCall';

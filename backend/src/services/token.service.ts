@@ -1,4 +1,4 @@
-import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import axios from "axios";
 import { TokenDataResponse } from "../types";
 
@@ -6,11 +6,7 @@ const apiUrl =
   "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=USD";
 
 @Injectable()
-export class TokenService implements OnApplicationBootstrap {
-  async onApplicationBootstrap(): Promise<void> {
-    await this.getTokenData();
-  }
-
+export class TokenService {
   async getTokenData(): Promise<TokenDataResponse | Error> {
     try {
       const { data, status } = await axios.get<TokenDataResponse>(apiUrl, {
