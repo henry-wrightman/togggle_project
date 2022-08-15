@@ -6,7 +6,7 @@ import {
   JoinColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { PlayerEntity, ScoreEntity } from "./";
+import { PlayerEntity } from "./";
 
 const minuteExpiration = 1;
 
@@ -25,7 +25,7 @@ export class GuessEntity {
   @Column({ default: 0 }) // -1 (down) 1 (up)
   guess: number;
 
-  @Column({ default: 0 }) 
+  @Column({ default: 0 })
   initialPrice: number;
 
   @Column({ default: 0 })

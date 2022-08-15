@@ -1,13 +1,10 @@
-import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { GuessEntity, PlayerEntity, ScoreEntity } from "../entities";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 @Injectable()
-export class DatabaseService implements OnApplicationBootstrap {
-  async onApplicationBootstrap(): Promise<void> {
-  }
-
+export class DatabaseService {
   constructor(
     @InjectRepository(GuessEntity)
     private readonly guessRepo: Repository<GuessEntity>,
@@ -19,7 +16,7 @@ export class DatabaseService implements OnApplicationBootstrap {
     private readonly scoreRepo: Repository<ScoreEntity>
   ) {}
 
-  async getPlayer(identifier: string): Promise<PlayerEntity|undefined> {
+  async getPlayer(identifier: string): Promise<PlayerEntity | undefined> {
     if (!identifier) return undefined;
     const result = await this.playerRepo.findOne({
       where: { identifier },
@@ -29,7 +26,7 @@ export class DatabaseService implements OnApplicationBootstrap {
     return result ? result : undefined;
   }
 
-  async addPlayer(identifier: string): Promise<PlayerEntity|undefined> {
+  async addPlayer(identifier: string): Promise<PlayerEntity | undefined> {
     if (!identifier) return undefined;
     const exists = await this.getPlayer(identifier);
     if (exists) return exists;
@@ -42,7 +39,10 @@ export class DatabaseService implements OnApplicationBootstrap {
     });
   }
 
-  async addGuess(playerId: number, guess: number): Promise<GuessEntity|undefined> {
+  async addGuess(
+    playerId: number,
+    guess: number
+  ): Promise<GuessEntity | undefined> {
     if (!playerId || !guess) return undefined;
     return await this.guessRepo.save({
       playerId,
@@ -52,7 +52,7 @@ export class DatabaseService implements OnApplicationBootstrap {
 
   async hasCurrentGuess(playerId: number): Promise<boolean> {
     if (!playerId) return false;
-    
+
     const time = new Date();
     const result = await this.guessRepo
       .createQueryBuilder("items")
@@ -70,7 +70,7 @@ export class DatabaseService implements OnApplicationBootstrap {
     initialPrice: number,
     finalPrice: number,
     winner: boolean | false
-  ): Promise<void|undefined> {
+  ): Promise<void | undefined> {
     if (!playerId || !guessId || !initialPrice || !finalPrice) return undefined;
 
     const guess = await this.guessRepo.findOne({
@@ -90,7 +90,10 @@ export class DatabaseService implements OnApplicationBootstrap {
     );
   }
 
-  async updateScore(playerId: number, value: number): Promise<void|undefined> {
+  async updateScore(
+    playerId: number,
+    value: number
+  ): Promise<void | undefined> {
     if (!playerId || !value) return undefined;
 
     const player = await this.playerRepo.findOne({
@@ -110,11 +113,11 @@ export class DatabaseService implements OnApplicationBootstrap {
     );
   }
 
-  async getLeaderboard(limit = 5): Promise<PlayerEntity[]|undefined>{
+  async getLeaderboard(limit = 5): Promise<PlayerEntity[] | undefined> {
     return await this.playerRepo.find({
       relations: { score: true },
       order: { score: { value: "DESC" } },
-      take: 5
-    });    
+      take: 5,
+    });
   }
 }
