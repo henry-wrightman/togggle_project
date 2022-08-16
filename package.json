@@ -8,6 +8,7 @@
     "backend": "cd backend && yarn start",
     "frontend": "cd MinuteBets && yarn start",
     "lint": "eslint \"**/*.{js,js,ts}\"",
+    "format": "prettier --write .",
     "test": "yarn && yarn concurrently \"cd backend && yarn && yarn test\" \"cd MinuteBets && yarn && yarn test\""
   },
   "devDependencies": {

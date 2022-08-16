@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import axios from "axios";
-import { TokenDataResponse } from "../types";
+import { TokenDataResponse } from "./";
 
 const apiUrl =
   "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=USD";

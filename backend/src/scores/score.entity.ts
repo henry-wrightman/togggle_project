@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { PlayerEntity } from "./";
+import { PlayerEntity } from "../players";
 
 @Entity({ name: "scores" })
 export class ScoreEntity {

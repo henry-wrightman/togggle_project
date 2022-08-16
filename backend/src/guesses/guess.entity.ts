@@ -6,7 +6,7 @@ import {
   JoinColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { PlayerEntity } from "./";
+import { PlayerEntity } from "../players";
 
 const minuteExpiration = 1;
 

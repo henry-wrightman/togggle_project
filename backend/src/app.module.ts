@@ -2,10 +2,11 @@ import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { TokenService } from "./services/token.service";
 import { getTypeOrmConfig } from "./scripts/getTypeOrmConfig";
-import { PlayerEntity, GuessEntity, ScoreEntity } from "./entities";
-import { DatabaseService } from "./services/database.service";
+import { TokenService } from "./tokens/";
+import { PlayerService, PlayerEntity } from "./players/";
+import { GuessService, GuessEntity} from "./guesses/";
+import { ScoreService, ScoreEntity } from "./scores/";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require("dotenv").config();
@@ -16,6 +17,6 @@ require("dotenv").config();
     TypeOrmModule.forFeature([PlayerEntity, GuessEntity, ScoreEntity]),
   ],
   controllers: [AppController],
-  providers: [DatabaseService, TokenService, AppService],
+  providers: [PlayerService, GuessService, ScoreService, TokenService, AppService],
 })
 export class AppModule {}

@@ -1,14 +1,16 @@
 import { Injectable } from "@nestjs/common";
-import { TokenService } from "./services/token.service";
-import { TokenDataResponse } from "./types";
-import { DatabaseService } from "./services/database.service";
-import { PlayerEntity } from "./entities";
+import { TokenService, TokenDataResponse } from "./tokens/";
+import { PlayerService, PlayerEntity } from "./players/";
+import { GuessService, GuessEntity} from "./guesses/";
+import { ScoreService, ScoreEntity } from "./scores/";
 
 @Injectable()
 export class AppService {
   constructor(
     private readonly tokenService: TokenService,
-    private readonly databaseService: DatabaseService
+    private readonly playerService: PlayerService,
+    private readonly scoreService: ScoreService,
+    private readonly guessService: GuessService
   ) {}
 
   async getTokenData(): Promise<TokenDataResponse | Error> {
@@ -21,12 +23,12 @@ export class AppService {
   }
 
   async addPlayer(identifier: string): Promise<PlayerEntity> {
-    const player = await this.databaseService.addPlayer(identifier);
+    const player = await this.playerService.addPlayer(identifier);
     return player;
   }
 
   async getPlayer(identifier: string): Promise<PlayerEntity> {
-    const player = await this.databaseService.getPlayer(identifier);
+    const player = await this.playerService.getPlayer(identifier);
     return player;
   }
 
@@ -35,14 +37,14 @@ export class AppService {
     guess: number,
     initialPrice: number
   ): Promise<void | Error> {
-    const newGuess = await this.databaseService.addGuess(playerId, guess);
+    const newGuess = await this.guessService.addGuess(playerId, guess);
     const timeRemaining = +new Date(newGuess.expiresAt) - +new Date();
 
     const callback = async (winnings, finalPrice) => {
       if (winnings === 0) throw Error("ERROR_CALCULATING_GUESS");
 
-      await this.databaseService.updateScore(playerId, winnings);
-      await this.databaseService.updateGuess(
+      await this.scoreService.updateScore(playerId, winnings);
+      await this.guessService.updateGuess(
         playerId,
         newGuess.id,
         initialPrice,
@@ -56,6 +58,6 @@ export class AppService {
   }
 
   async getLeaderboard(): Promise<PlayerEntity[]> {
-    return await this.databaseService.getLeaderboard();
+    return await this.scoreService.getLeaderboard();
   }
 }
