@@ -1,13 +1,13 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { AppController } from "../src/app.controller";
-import { AppService } from "../src/app.service";
-import { TokenService } from "../src/services/token.service";
-import { GuessGuard } from "../src/guards/GuessGuard";
-import { DatabaseService } from "../src/services/database.service";
-import { DbTestingModule } from "./helpers/dbTesting.module";
-import { INestApplication } from "@nestjs/common";
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppController } from '../src/app.controller';
+import { AppService } from '../src/app.service';
+import { TokenService } from '../src/services/token.service';
+import { GuessGuard } from '../src/guards/GuessGuard';
+import { DatabaseService } from '../src/services/database.service';
+import { DbTestingModule } from './helpers/dbTesting.module';
+import { INestApplication } from '@nestjs/common';
 
-describe("AppController", () => {
+describe('AppController', () => {
   let appController: AppController;
   let module: TestingModule;
   let app: INestApplication;
@@ -28,31 +28,28 @@ describe("AppController", () => {
     await app.close();
   });
 
-  describe("app controller tests", () => {
-    it("should ensure the GuessGuard is applied to the addGuess method", async () => {
-      const guards = Reflect.getMetadata(
-        "__guards__",
-        AppController.prototype.addGuess
-      );
+  describe('app controller tests', () => {
+    it('should ensure the GuessGuard is applied to the addGuess method', async () => {
+      const guards = Reflect.getMetadata('__guards__', AppController.prototype.addGuess);
       const guard = new guards[0]();
       expect(guard).toBeInstanceOf(GuessGuard);
     });
 
-    it("should assert valid tokenData request", async () => {
+    it('should assert valid tokenData request', async () => {
       expect(await appController.getTokenData()).not.toBeNaN();
     });
 
-    it("should assert valid getPlayer request", async () => {
-      const identifier = "abc-123";
+    it('should assert valid getPlayer request', async () => {
+      const identifier = 'abc-123';
       expect(await appController.getPlayer(identifier)).not.toBeNaN();
     });
 
-    it("should assert valid addPlayer request", async () => {
-      const identifier = "abc-123";
+    it('should assert valid addPlayer request', async () => {
+      const identifier = 'abc-123';
       expect(await appController.addPlayer(identifier)).not.toBeNaN();
     });
 
-    it("should assert valid addGuess request", async () => {
+    it('should assert valid addGuess request', async () => {
       expect(await appController.addGuess(1, 1, 15000)).resolves;
     });
   });

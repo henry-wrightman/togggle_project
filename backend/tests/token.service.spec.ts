@@ -1,7 +1,7 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { TokenService } from "../src/services/token.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { TokenService } from '../src/services/token.service';
 
-describe("TokenService", () => {
+describe('TokenService', () => {
   let tokenService: TokenService;
 
   beforeEach(async () => {
@@ -14,8 +14,8 @@ describe("TokenService", () => {
     tokenService = app.get<TokenService>(TokenService);
   });
 
-  describe("test tokenData result", () => {
-    it("standard request", async () => {
+  describe('test tokenData result', () => {
+    it('standard request', async () => {
       await expect(await tokenService.getTokenData()).resolves;
     });
   });

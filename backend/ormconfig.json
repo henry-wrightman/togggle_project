@@ -4,12 +4,8 @@
   "username": "postgres",
   "password": "postgres",
   "database": "postgres",
-  "entities": [
-    "src/entities/*.ts"
-  ],
-  "migrations": [
-    "migration/*..ts"
-  ],
+  "entities": ["src/entities/*.ts"],
+  "migrations": ["migration/*..ts"],
   "ssl": false,
   "type": "postgres",
   "migrationsTableName": "migration",

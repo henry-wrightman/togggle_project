@@ -1,1 +1,1 @@
-export { TokenDataResponse } from "./TokenDataResponse";
+export { TokenDataResponse } from './TokenDataResponse';

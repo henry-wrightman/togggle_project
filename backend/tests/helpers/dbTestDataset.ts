@@ -1,16 +1,11 @@
-import {
-  createConnection,
-  getConnection,
-  getConnectionManager,
-  Connection,
-} from "typeorm";
-import { GuessEntity, PlayerEntity } from "../../src/entities";
-import { DbConnectionOptions } from "./dbTesting.module";
+import { createConnection, getConnection, getConnectionManager, Connection } from 'typeorm';
+import { GuessEntity, PlayerEntity } from '../../src/entities';
+import { DbConnectionOptions } from './dbTesting.module';
 
 export const initTestDataset = async () => {
   let connection: Connection;
 
-  if (!getConnectionManager().has("default")) {
+  if (!getConnectionManager().has('default')) {
     connection = await createConnection(DbConnectionOptions);
   } else {
     connection = getConnection();
@@ -26,13 +21,13 @@ export const initTestDataset = async () => {
 
   const playerOneEntity = {
     id: 1,
-    identifier: "abc-123",
+    identifier: 'abc-123',
     score: playerOneScore,
   };
 
   const playerTwoEntity = {
     id: 2,
-    identifier: "def-123",
+    identifier: 'def-123',
     score: playerTwoScore,
   };
 

@@ -1,13 +1,7 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { PlayerEntity } from "./";
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { PlayerEntity } from './';
 
-@Entity({ name: "scores" })
+@Entity({ name: 'scores' })
 export class ScoreEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -19,9 +13,9 @@ export class ScoreEntity {
   value: number;
 
   @CreateDateColumn({
-    name: "time",
-    type: "timestamp",
-    default: () => "now()",
+    name: 'time',
+    type: 'timestamp',
+    default: () => 'now()',
   })
   time: Date;
 }

@@ -1,7 +1,7 @@
-import { Injectable } from "@nestjs/common";
-import { GuessEntity, PlayerEntity, ScoreEntity } from "../entities";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Injectable } from '@nestjs/common';
+import { GuessEntity, PlayerEntity, ScoreEntity } from '../entities';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class DatabaseService {
@@ -39,10 +39,7 @@ export class DatabaseService {
     });
   }
 
-  async addGuess(
-    playerId: number,
-    guess: number
-  ): Promise<GuessEntity | undefined> {
+  async addGuess(playerId: number, guess: number): Promise<GuessEntity | undefined> {
     if (!playerId || !guess) return undefined;
     return await this.guessRepo.save({
       playerId,
@@ -55,11 +52,8 @@ export class DatabaseService {
 
     const time = new Date();
     const result = await this.guessRepo
-      .createQueryBuilder("items")
-      .where(
-        "items.playerId = :playerId and items.expiresAt > :time and items.createdAt <= :time",
-        { playerId, time }
-      )
+      .createQueryBuilder('items')
+      .where('items.playerId = :playerId and items.expiresAt > :time and items.createdAt <= :time', { playerId, time })
       .getMany();
     return result.length > 0 ? true : false;
   }
@@ -90,10 +84,7 @@ export class DatabaseService {
     );
   }
 
-  async updateScore(
-    playerId: number,
-    value: number
-  ): Promise<void | undefined> {
+  async updateScore(playerId: number, value: number): Promise<void | undefined> {
     if (!playerId || !value) return undefined;
 
     const player = await this.playerRepo.findOne({
@@ -116,7 +107,7 @@ export class DatabaseService {
   async getLeaderboard(limit = 5): Promise<PlayerEntity[] | undefined> {
     return await this.playerRepo.find({
       relations: { score: true },
-      order: { score: { value: "DESC" } },
+      order: { score: { value: 'DESC' } },
       take: 5,
     });
   }

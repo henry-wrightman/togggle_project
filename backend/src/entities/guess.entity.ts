@@ -1,16 +1,9 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  JoinColumn,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { PlayerEntity } from "./";
+import { Column, CreateDateColumn, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { PlayerEntity } from './';
 
 const minuteExpiration = 1;
 
-@Entity({ name: "guesses" })
+@Entity({ name: 'guesses' })
 export class GuessEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -35,15 +28,15 @@ export class GuessEntity {
   winner: boolean;
 
   @CreateDateColumn({
-    name: "createdAt",
-    type: "timestamptz",
-    default: () => "NOW()",
+    name: 'createdAt',
+    type: 'timestamptz',
+    default: () => 'NOW()',
   })
   createdAt: Date;
 
   @CreateDateColumn({
-    name: "expiresAt",
-    type: "timestamptz",
+    name: 'expiresAt',
+    type: 'timestamptz',
     default: () => "NOW() + '60 second'::interval",
   })
   expiresAt: Date;

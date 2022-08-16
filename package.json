@@ -2,11 +2,15 @@
   "name": "main",
   "version": "1.0.0",
   "private": "true",
-  "workspaces": ["MinuteBets", "backend"],
+  "workspaces": [
+    "MinuteBets",
+    "backend"
+  ],
   "scripts": {
     "start": "yarn && yarn concurrently \"cd backend && yarn && nest build && nest start\" \"cd MinuteBets && yarn && yarn start\"",
     "backend": "cd backend && yarn start",
     "frontend": "cd MinuteBets && yarn start",
+    "format": "npx prettier --write .",
     "lint": "eslint \"**/*.{js,js,ts}\"",
     "test": "yarn && yarn concurrently \"cd backend && yarn && yarn test\" \"cd MinuteBets && yarn && yarn test\""
   },

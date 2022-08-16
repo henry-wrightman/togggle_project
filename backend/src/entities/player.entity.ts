@@ -1,14 +1,7 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  OneToOne,
-  JoinColumn,
-} from "typeorm";
-import { ScoreEntity, GuessEntity } from "./";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { ScoreEntity, GuessEntity } from './';
 
-@Entity({ name: "players" })
+@Entity({ name: 'players' })
 export class PlayerEntity {
   @PrimaryGeneratedColumn()
   id: number;

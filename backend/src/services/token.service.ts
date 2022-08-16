@@ -1,9 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import axios from "axios";
-import { TokenDataResponse } from "../types";
+import { Injectable } from '@nestjs/common';
+import axios from 'axios';
+import { TokenDataResponse } from '../types';
 
-const apiUrl =
-  "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=USD";
+const apiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=USD';
 
 @Injectable()
 export class TokenService {
@@ -11,7 +10,7 @@ export class TokenService {
     try {
       const { data, status } = await axios.get<TokenDataResponse>(apiUrl, {
         headers: {
-          Accept: "application/json",
+          Accept: 'application/json',
         },
       });
       return data;
@@ -19,7 +18,7 @@ export class TokenService {
       if (axios.isAxiosError(error)) {
         throw new Error(error.message);
       } else {
-        throw new Error("An unexpected error occurred");
+        throw new Error('An unexpected error occurred');
       }
     }
   }
